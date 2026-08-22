@@ -1,0 +1,10 @@
+# Verified installed and imported under Python 3.14.4 (macOS, arm64).
+# Charts are generated with matplotlib; plotly is used for the one HTML dashboard.
+# Database access uses SQLAlchemy + PyMySQL (pure-Python driver, no build step).
+pandas==3.0.5
+numpy==2.5.2
+matplotlib==3.11.1
+openpyxl==3.1.5
+PyMySQL==2.2.8
+SQLAlchemy==2.0.52
+plotly==6.9.0

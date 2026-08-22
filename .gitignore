@@ -1,0 +1,23 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Local database credentials — never commit
+.env
+.my.cnf
+*.local.cnf
+db.local.*
+
+# Raw source data: large and/or license-restricted.
+# Reproduce it with each project's data/ loader scripts.
+*/data/raw/
+
+# Large archives / workbooks
+*.zip
+*.xlsx
