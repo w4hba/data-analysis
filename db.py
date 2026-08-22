@@ -45,3 +45,17 @@ def get_engine() -> Engine:
     host, user, password, db = _params()
     url = f"mysql+pymysql://{user}:{quote_plus(password)}@{host}/{db}?charset=utf8mb4"
     return create_engine(url)
+
+
+def query_file(engine: Engine, sql_path: str | pathlib.Path):
+    """Run a single-statement .sql file and return the result as a DataFrame.
+
+    Charts read their committed .sql file directly so the figure and the query can
+    never drift apart.
+    """
+    import pandas as pd
+    from sqlalchemy import text
+
+    sql = pathlib.Path(sql_path).read_text(encoding="utf-8").strip().rstrip(";")
+    with engine.connect() as conn:
+        return pd.read_sql(text(sql), conn)
