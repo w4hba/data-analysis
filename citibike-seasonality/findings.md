@@ -1,4 +1,4 @@
-# Findings — Citi Bike demand patterns, 2024
+# Findings: Citi Bike demand patterns, 2024
 
 ## Question
 How does Citi Bike demand move across seasons, days of the week, and hours of the
@@ -6,7 +6,7 @@ day, and how do annual members differ from casual riders? The point is operation
 when and where are bikes actually needed, and who is worth converting to membership?
 
 ## Data and method
-14,972,591 clean rides from four months of 2024 — January, April, July, October, one
+14,972,591 clean rides from four months of 2024 (January, April, July, October), one
 per season (see [`data/README.md`](data/README.md) for why four months rather than the
 full year). Loaded with `LOAD DATA LOCAL INFILE`, cleaned in SQL: removed 3,664 rides
 over 24 hours and a small number of invalid rows, kept 10,880 dockless pickups as NULL
@@ -19,18 +19,18 @@ groups on one shared definition.
 ![Seasonal demand](assets/seasonal_demand.png)
 
 October was the busiest sampled month at 5.1M rides, 2.7× January's 1.9M. Casual
-riders are a bigger share when the weather is good — 11% of January rides, 23% of
-July's. The annual member base is steadier; casual demand is what swings with the
-season. (October edging out July is specific to 2024's weather; four months can't
-pin the exact annual peak — see caveats.)
+riders are a bigger share when the weather is good, rising from 11% of January rides
+to 23% of July's. The annual member base is steadier; casual demand is what swings
+with the season. (October edging out July is specific to 2024's weather; four months
+can't pin the exact annual peak. See caveats.)
 
 ### 2. Members commute, casual riders take weekend trips
 ![Weekday x hour heatmap](assets/hourly_weekly_heatmap.png)
 
-Members show the classic commuter signature: a sharp weekday double-peak around 8am
+Members show the commuter signature: a sharp weekday double-peak around 8am
 and 5–6pm (the evening peak hits ~949k rides in the sampled data, the morning ~757k),
-fading on weekends. Casual riders invert it — their demand concentrates on weekend
-middays. These are two different products sharing one bike fleet.
+fading on weekends. Casual riders invert it. Their demand concentrates on weekend
+middays. These are two different products on one bike fleet.
 
 The behavioral summary backs it up:
 
@@ -48,16 +48,16 @@ Casual trips run nearly twice as long, lean to weekends, and use e-bikes more.
 
 The 7-day average (bold) rises across the year from roughly 60k rides/day in January
 to about 170k in October. Within every month the raw daily counts sawtooth downward on
-weekends — the weekday commute is the base load, consistent with members being 80% of
+weekends. The weekday commute is the base load, consistent with members being 80% of
 rides.
 
 ### 4. The busiest stations are commuter docks
 ![Top stations](assets/top_stations.png)
 
 The top 15 start stations sit in Midtown and around transit hubs (W 21 St & 6 Ave
-leads at ~57k), and they are overwhelmingly member-driven — most are 10–18% casual.
+leads at ~57k), and they are mostly member-driven, most at 10–18% casual.
 The exception is 7 Ave & Central Park South at 47% casual with a 25-minute average
-trip: a leisure and tourist dock, not a commuter one.
+trip: a leisure and tourist dock rather than a commuter one.
 
 ## Caveats and limitations
 - **Four months, not a continuous year.** Seasonality here is a four-season
@@ -76,12 +76,12 @@ trip: a leisure and tourist dock, not a commuter one.
   be projected onto other systems or years without checking.
 
 ## Recommendation
-Run operations against two demand curves, not one. On weekdays, rebalancing should
-track the member commute — bikes toward business districts before the 8am peak, back
-toward residential areas before the evening peak. On weekends, shift toward the
+Run operations against two demand curves rather than one. On weekdays, rebalancing
+should track the member commute: bikes toward business districts before the 8am peak,
+back toward residential areas before the evening peak. On weekends, shift toward the
 leisure corridors near parks and the waterfront where casual demand concentrates.
 Scale seasonal bike supply and staffing roughly 2.7× from the winter trough to the
-fall peak, and plan the annual capacity peak for early fall, not mid-summer. Casual
-riders — longer trips, weekend-heavy, higher e-bike use — are the natural membership
-conversion target; leisure-heavy stations like Central Park South are where to reach
-them.
+fall peak, and plan the annual capacity peak for early fall instead of mid-summer.
+Casual riders (longer trips, weekend-heavy, higher e-bike use) are the natural
+membership conversion target; leisure-heavy stations like Central Park South are where
+to reach them.

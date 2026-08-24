@@ -1,9 +1,9 @@
-# Findings — where e-commerce sessions convert, Online Shoppers Intention
+# Findings: where e-commerce sessions convert, Online Shoppers Intention
 
 ## Question
 Of 12,330 browsing sessions, 15.5% ended in a purchase. Where do the other 84.5%
-fall away, which visitor types and traffic sources convert best, and what actually
-separates a converting session from a bouncing one?
+fall away, which visitor types and traffic sources convert best, and what separates a
+converting session from a bouncing one?
 
 ## Data and method
 One year of sessions from an e-commerce site (UCI Online Shoppers Intention). Each row
@@ -22,7 +22,7 @@ Split sessions by how far they engage: 77.6% browse product pages but never reac
 page with any PageValue, and they convert at 3.8%. The 22.1% that do reach a valued
 page convert at 56.3%. Getting a session to a page the site has assigned value to is
 the difference between a 4% and a 56% outcome. (Read the direction of that with the
-caveat below — PageValues is partly a consequence of converting, not only a cause.)
+caveat below. PageValues is partly a consequence of converting, not only a cause.)
 
 ### 2. New visitors convert nearly twice as often as returning ones
 | Visitor type | Sessions | Conversion | 95% CI |
@@ -32,9 +32,9 @@ caveat below — PageValues is partly a consequence of converting, not only a ca
 | Returning | 10,551 | 13.9% | 13.3–14.6% |
 
 New visitors convert at 24.9% against returning visitors' 13.9%, and the confidence
-intervals don't overlap, so the gap is real rather than noise. It's also
+intervals don't overlap, so the gap is real rather than noise. It is also
 counterintuitive, and probably says more about who arrives as a "new" session (often
-intent-driven, campaign-driven first visits) than about newness itself. It's a
+intent-driven, campaign-driven first visits) than about newness itself. It is a
 correlation worth investigating, not a reason to stop marketing to returning customers.
 
 ### 3. Conversion varies fivefold across traffic sources
@@ -46,12 +46,12 @@ comfortably above the 15.5% site average. The channels are anonymized integer co
 this ranks them without naming them, but the spread is large and, for the well-separated
 pairs, statistically clear.
 
-### 4. PageValues sorts sessions almost perfectly — with a catch
+### 4. PageValues sorts sessions almost perfectly, with a catch
 ![PageValues effect](assets/pagevalues_effect.png)
 
 Sessions with PageValues of zero (78% of all sessions) convert at 3.9%. Among the rest,
-conversion climbs monotonically across quartiles: 36%, 49%, 62%, 78%. This is by far
-the sharpest separator in the dataset. The catch is in the caveats: PageValues is a
+conversion climbs monotonically across quartiles: 36%, 49%, 62%, 78%. This is the
+sharpest separator in the dataset. The catch is in the caveats: PageValues is a
 Google Analytics metric that credits pages along the path to a transaction, so a
 converting session tends to accrue PageValues *because* it converted. It is closer to a
 mirror of the outcome than to an independent early signal.
@@ -64,7 +64,7 @@ window), then falls back in December. February is the trough at 1.6%. The datase
 January or April rows, so the curve has gaps. Weekend sessions convert a little higher
 than weekday (17.4% vs 14.9%). One non-result worth stating: the `SpecialDay` feature,
 which measures closeness to holidays like Valentine's and Mother's Day, is nonzero only
-in February and May — the two lowest-converting months — so as encoded it does not track
+in February and May (the two lowest-converting months), so as encoded it does not track
 conversion at all.
 
 ## Caveats and limitations
@@ -85,8 +85,8 @@ conversion at all.
 Work the two things that are both real and actionable: channel and timing. Shift
 acquisition budget toward the high-converting sources (traffic types 8, 20, and the
 high-volume type 2) and away from the 6–9% laggards, and weight campaigns toward the
-fall run-up to November. Treat the new-visitor conversion advantage as a lead to chase —
-find out which channels produce those first-visit conversions and whether the returning-
+fall run-up to November. Treat the new-visitor conversion advantage as a lead to chase.
+Find out which channels produce those first-visit conversions and whether the returning-
 visitor experience is leaking otherwise-loyal customers. Do not build a strategy around
 raising PageValues or around SpecialDay: the first is largely a reflection of conversion
 already happening, and the second doesn't move with conversion in this data.

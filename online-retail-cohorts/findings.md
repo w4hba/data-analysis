@@ -1,4 +1,4 @@
-# Findings — customer retention and value, Online Retail II
+# Findings: customer retention and value, Online Retail II
 
 ## Question
 The business runs on repeat buyers, but which ones, and where does the retention
@@ -47,7 +47,7 @@ signal is the contrast between November holiday cohorts and the rest.
 ### 3. Two segments hold 85% of revenue; one is leaking
 ![RFM segments](assets/rfm_segments.png)
 
-Scoring every customer on Recency, Frequency, and Monetary value (quintiles):
+Each customer gets a quintile score on Recency, Frequency, and Monetary value.
 Champions (1,576 customers) and Loyal (1,223) together account for 85% of revenue.
 The segment worth acting on is **At Risk**: 711 customers who bought 5.5 times on
 average but have not returned in about a year. They contributed £1.5M and are
@@ -79,7 +79,7 @@ of customers account for 64% of revenue, the top 30% for 85%.
   "360 days since last order" is relative to that frozen date.
 
 ## Recommendation
-Prioritize the At Risk segment. These are 711 proven repeat buyers, worth £1.5M
+Prioritize the At Risk segment. These are 711 repeat buyers, worth £1.5M
 historically, who lapsed but have not yet gone cold. Winning back even a fraction is
 cheaper than the near-impossible task of converting one-time holiday buyers, who
 churn hard and contribute little. Two supporting moves: because the second purchase

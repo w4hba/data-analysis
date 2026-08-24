@@ -1,4 +1,4 @@
-# Data source — Online Shoppers Purchasing Intention
+# Data source: Online Shoppers Purchasing Intention
 
 ## Source
 - **Dataset:** Online Shoppers Purchasing Intention Dataset
@@ -24,16 +24,16 @@ one user. So the "funnel" in this project is **engineered** from the page-group 
 by step through a real user journey. The analysis says so wherever it matters.
 
 ## Known data quality issues (verified on the file)
-- **Month is inconsistent** — nine 3-letter codes plus one spelled-out `June`; `02`
+- **Month is inconsistent.** Nine 3-letter codes plus one spelled-out `June`; `02`
   normalizes them to a month number.
-- **Two months are missing** — no January or April rows at all, so any month/seasonal
+- **Two months are missing.** No January or April rows at all, so any month/seasonal
   read has gaps.
-- **125 exact-duplicate rows** — kept, not dropped. Rows are anonymized session
+- **125 exact-duplicate rows** are kept, not dropped. Rows are anonymized session
   feature-vectors, so identical rows are plausibly distinct bounce sessions; removing
   them would undercount bounces. Flagged, not deleted.
-- **Anonymized codes** — OperatingSystems, Browser, Region, TrafficType are integer
+- **Anonymized codes.** OperatingSystems, Browser, Region, TrafficType are integer
   codes with no published lookup, so segments are "TrafficType 2", not "Google / paid".
-- **Class imbalance** — 15.47% positive. Matters for baselining conversion lift.
+- **Class imbalance.** 15.47% positive. Matters for baselining conversion lift.
 - **PageValues is 0 for 77.9% of sessions** and long-tailed otherwise.
 
 ## Reproduction

@@ -1,4 +1,4 @@
-# Data source — NYC Citi Bike 2024
+# Data source, NYC Citi Bike 2024
 
 ## Source
 - **Dataset:** Citi Bike System Data (trip histories)
@@ -8,20 +8,20 @@
 - **License:** [NYCBS Data Use Policy](https://www.citibikenyc.com/data-sharing-policy). Grants a royalty-free, perpetual license to analyze and publish results for **non-commercial** purposes. It prohibits re-selling or re-hosting the raw data as a standalone dataset and prohibits re-identifying riders.
 
 This repository is a non-commercial analysis portfolio. It does not redistribute the
-raw data — `data/raw/` is gitignored, and only derived aggregates and code are
+raw data. `data/raw/` is gitignored, and only derived aggregates and code are
 committed, which the policy permits. Attribution: data provided by Citi Bike / NYC
 Bike Share.
 
 ## Scope: four representative months
 Full-year 2024 is ~8.6 GB zipped (~40M rides). This project uses **four months, one
-per season** — January, April, July, October 2024 (~2.9 GB, ~12M rides) — which keeps
+per season** (January, April, July, October 2024, ~2.9 GB, ~12M rides). That keeps
 the load feasible on a laptop while still showing the seasonal contrast (winter vs
 summer ridership) and the full within-week and within-day demand patterns.
 
-The consequence, stated plainly: seasonality here is read as a **four-season
-comparison**, not a smooth twelve-month curve. Month-over-month values between, say,
-February and March are not available. The daily, weekly, and hourly patterns are
-complete within each of the four months.
+The consequence: seasonality here is a **four-season comparison**, not a smooth
+twelve-month curve. Month-over-month values between, say, February and March are not
+available. The daily, weekly, and hourly patterns are complete within each of the four
+months.
 
 ## Schema
 The 2024 files use Citi Bike's current 13-column format: `ride_id, rideable_type,
@@ -29,20 +29,20 @@ started_at, ended_at, start_station_name, start_station_id, end_station_name,
 end_station_id, start_lat, start_lng, end_lat, end_lng, member_casual`. Timestamps
 carry millisecond precision.
 
-This project loads six of the thirteen columns — `rideable_type, started_at,
-ended_at, start_station_name, start_station_id, member_casual` — and skips ride_id,
+This project loads six of the thirteen columns (`rideable_type, started_at,
+ended_at, start_station_name, start_station_id, member_casual`) and skips ride_id,
 the end station, and all lat/lng, which the seasonality and operational questions do
 not use. Staying on 2024-only data also sidesteps the pre-2021 schema (which used
 `tripduration`, `starttime`, `usertype`, `birth year`, `gender`); mixing the two
 would require reconciling different column sets.
 
 ## Known data quality issues
-- **Missing start stations** — dockless / e-bike pickups leave the station name and
+- **Missing start stations**: dockless / e-bike pickups leave the station name and
   id blank. Kept (loaded as NULL); they only drop out of the station-level query.
-- **Bad durations** — some rides have `ended_at <= started_at`, and a small number
+- **Bad durations**: some rides have `ended_at <= started_at`, and a small number
   run longer than 24 hours (undocked or lost bikes, not real trips). Both are removed.
-- **Sub-minute trips** — real short hops and re-docks; these are kept.
-- **Multiple files per month** — busy months split across several CSVs, each with its
+- **Sub-minute trips**: real short hops and re-docks; these are kept.
+- **Multiple files per month**: busy months split across several CSVs, each with its
   own header row. The loader ignores the header of every file.
 
 Measured counts (from `sql/02_load_and_clean.sql`):
@@ -55,9 +55,9 @@ Measured counts (from `sql/02_load_and_clean.sql`):
 | Over 24h (removed) | 3,664 |
 | Out-of-scope / invalid rows (removed) | 1,843 |
 | **Clean rows kept** | **14,972,591** |
-| — of which null start station (kept) | 10,880 |
+| of which null start station (kept) | 10,880 |
 
-The 2024 files are notably clean: no null timestamps and no negative durations, unlike
+The 2024 files are clean: no null timestamps and no negative durations, unlike
 the messiness the pre-2021 schema is known for. The real cleaning work is removing the
 3,664 over-24h rides and staying disciplined about the null-station rows.
 

@@ -1,4 +1,4 @@
-# Data source — Online Retail II
+# Data source: Online Retail II
 
 ## Source
 - **Dataset:** Online Retail II
@@ -32,9 +32,9 @@ python data/convert_xlsx_to_csv.py     # -> data/raw/online_retail_II.csv
 ## Why a conversion step exists
 The source is a single `.xlsx` with two sheets, one per year. MySQL's `LOAD DATA` reads
 CSV, not Excel, so `convert_xlsx_to_csv.py` stacks both sheets into one CSV. It changes
-only what is needed to make the file loadable — nulls written as `\N`, integer customer
+only what is needed to make the file loadable: nulls written as `\N`, integer customer
 IDs, ISO datetimes, and newlines stripped from free-text descriptions. Everything else
-(cancellations, negatives, duplicates, non-product codes) is left intact and handled in
+(cancellations, negatives, duplicates, non-product codes) stays intact and is handled in
 `sql/02_load_and_clean.sql`, so the cleaning logic is visible in SQL rather than hidden
 in a script.
 

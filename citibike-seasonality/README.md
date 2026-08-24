@@ -1,4 +1,4 @@
-# Operational demand and seasonality — NYC Citi Bike 2024
+# Operational demand and seasonality: NYC Citi Bike 2024
 
 **Question:** How does bike-share demand move across seasons, weekdays, and hours, and
 how do members differ from casual riders?
@@ -16,12 +16,12 @@ stations, with a few leisure exceptions near parks.
 ## Approach
 1. **Load** all monthly CSVs into a staging table with `LOAD DATA LOCAL INFILE` ([`data/load_trips.sh`](data/load_trips.sh)), keeping 6 of 13 columns.
 2. **Clean** in SQL ([`sql/02_load_and_clean.sql`](sql/02_load_and_clean.sql)): drop over-24h and invalid rides, keep dockless NULL stations → 14.97M rows. Time-part columns are generated ([`sql/01_schema.sql`](sql/01_schema.sql)).
-3. **Analyze** — one question per file:
-   - [`03_seasonal_demand.sql`](sql/03_seasonal_demand.sql) — rides and rider mix by season
-   - [`04_hourly_weekly_profile.sql`](sql/04_hourly_weekly_profile.sql) — weekday × hour demand by rider type
-   - [`05_member_vs_casual.sql`](sql/05_member_vs_casual.sql) — behavioral comparison
-   - [`06_daily_trend_rolling.sql`](sql/06_daily_trend_rolling.sql) — daily counts with a 7-day moving average
-   - [`07_top_stations.sql`](sql/07_top_stations.sql) — busiest stations by volume, with casual share
+3. **Analyze**, one question per file:
+   - [`03_seasonal_demand.sql`](sql/03_seasonal_demand.sql): rides and rider mix by season
+   - [`04_hourly_weekly_profile.sql`](sql/04_hourly_weekly_profile.sql): weekday × hour demand by rider type
+   - [`05_member_vs_casual.sql`](sql/05_member_vs_casual.sql): behavioral comparison
+   - [`06_daily_trend_rolling.sql`](sql/06_daily_trend_rolling.sql): daily counts with a 7-day moving average
+   - [`07_top_stations.sql`](sql/07_top_stations.sql): busiest stations by volume, with casual share
 4. **Chart** from live query output ([`analysis/`](analysis)) → [`assets/`](assets).
 
 MySQL 8.0 syntax on MySQL 9.7.1. Charts in Python (pandas + matplotlib). Window
@@ -49,7 +49,7 @@ out. Member/casual is a plan type, not a verified tourist/resident split. Full l
 ## Reproduce
 ```bash
 # from the repo root, venv active, db.local.cnf in place, local_infile=1 on the server
-# (download+unzip the 4 months first — see data/README.md)
+# (download+unzip the 4 months first, see data/README.md)
 mysql --defaults-extra-file=db.local.cnf < citibike-seasonality/sql/01_schema.sql
 bash citibike-seasonality/data/load_trips.sh
 mysql --defaults-extra-file=db.local.cnf < citibike-seasonality/sql/02_load_and_clean.sql
