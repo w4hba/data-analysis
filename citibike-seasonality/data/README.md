@@ -45,8 +45,21 @@ would require reconciling different column sets.
 - **Multiple files per month** — busy months split across several CSVs, each with its
   own header row. The loader ignores the header of every file.
 
-Measured counts for each of these are printed by `sql/02_load_and_clean.sql` and
-recorded below after the load.
+Measured counts (from `sql/02_load_and_clean.sql`):
+
+| Step | Rows |
+|---|---:|
+| Raw staging rows loaded | 14,978,098 |
+| Null timestamp | 0 |
+| Non-positive duration (end ≤ start) | 0 |
+| Over 24h (removed) | 3,664 |
+| Out-of-scope / invalid rows (removed) | 1,843 |
+| **Clean rows kept** | **14,972,591** |
+| — of which null start station (kept) | 10,880 |
+
+The 2024 files are notably clean: no null timestamps and no negative durations, unlike
+the messiness the pre-2021 schema is known for. The real cleaning work is removing the
+3,664 over-24h rides and staying disciplined about the null-station rows.
 
 ## Reproduction
 ```bash
