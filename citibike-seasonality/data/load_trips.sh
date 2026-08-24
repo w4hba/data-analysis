@@ -21,11 +21,11 @@ if [ ${#files[@]} -eq 0 ]; then
   exit 1
 fi
 
-mysql --local-infile=1 --defaults-extra-file="$CNF" -e "TRUNCATE TABLE trips_stg;"
+mysql --defaults-extra-file="$CNF" --local-infile=1 -e "TRUNCATE TABLE trips_stg;"
 
 for f in "${files[@]}"; do
   echo "loading $(basename "$f") ..."
-  mysql --local-infile=1 --defaults-extra-file="$CNF" -e "
+  mysql --defaults-extra-file="$CNF" --local-infile=1 -e "
     LOAD DATA LOCAL INFILE '$f' INTO TABLE trips_stg
     FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
     LINES TERMINATED BY '\n' IGNORE 1 LINES
@@ -38,5 +38,5 @@ for f in "${files[@]}"; do
         member_casual      = TRIM(TRAILING '\r' FROM @mc);"
 done
 
-n=$(mysql --defaults-extra-file="$CNF" -N -e "SELECT COUNT(*) FROM trips_stg;")
+n=$(mysql --defaults-extra-file="$CNF" -N -e "SELECT COUNT(*) FROM trips_stg;" 2>/dev/null)
 echo "loaded $n rows into trips_stg"
