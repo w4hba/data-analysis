@@ -59,8 +59,6 @@ pip install -r requirements.txt
 Each project's README lists the exact download, load, and chart steps. Raw data is not
 committed; the loaders reproduce it from the documented sources.
 
-## Author
-[PLACEHOLDER, your name] · [PLACEHOLDER, email / LinkedIn / portfolio link]
-
+## License
 Code is MIT licensed ([LICENSE](LICENSE)). Each dataset keeps its own license, cited in
 the project's `data/README.md`.
